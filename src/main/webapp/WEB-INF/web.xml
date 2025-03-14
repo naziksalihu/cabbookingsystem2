@@ -1,0 +1,82 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <!-- Register Servlet -->
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.example.cabbookingsystem2.servlets.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <!-- Login Servlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.cabbookingsystem2.servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin Dashboard Servlet -->
+    <servlet>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <servlet-class>com.example.cabbookingsystem2.servlets.AdminDashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <url-pattern>/admin-dashboard</url-pattern>
+    </servlet-mapping>
+
+    <!-- Update Booking Status Servlet -->
+    <servlet>
+        <servlet-name>UpdateBookingStatusServlet</servlet-name>
+        <servlet-class>com.example.cabbookingsystem2.servlets.UpdateBookingStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateBookingStatusServlet</servlet-name>
+        <url-pattern>/update-status</url-pattern>
+    </servlet-mapping>
+
+    <!-- Add Destination Servlet -->
+    <servlet>
+        <servlet-name>AddDestinationServlet</servlet-name>
+        <servlet-class>com.example.cabbookingsystem2.servlets.AddDestinationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddDestinationServlet</servlet-name>
+        <url-pattern>/addDestination</url-pattern>
+    </servlet-mapping>
+
+    <!-- Manage Destinations Page (JSP) -->
+    <servlet>
+        <servlet-name>ManageDestinationsPage</servlet-name>
+        <jsp-file>/admin/manage_destinations.jsp</jsp-file> <!-- Assuming you are using JSP for this page -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageDestinationsPage</servlet-name>
+        <url-pattern>/manageDestinations</url-pattern>
+    </servlet-mapping>
+
+    <!-- Default servlet configuration (for static content like HTML, images, etc.) -->
+    <servlet>
+        <servlet-name>default</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>0</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,45 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mega City Cab</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+
+<div class="card p-4 shadow-lg" style="width: 400px;">
+    <h3 class="text-center">Login</h3>
+
+    <%-- Display messages only if they exist --%>
+    <% if (request.getParameter("error") != null) { %>
+    <div class="alert alert-danger text-center">
+        Invalid login credentials, please try again.
+    </div>
+    <% } else if (request.getParameter("success") != null) { %>
+    <div class="alert alert-success text-center">
+        Registration successful! Please login.
+    </div>
+    <% } %>
+
+    <form action="login" method="post">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p>Don't have an account? <a href="register.html">Register</a></p>
+    </div>
+</div>
+
+</body>
+</html>

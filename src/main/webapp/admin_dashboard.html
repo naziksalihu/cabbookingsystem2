@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Mega City Cab</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h2>Welcome Admin</h2>
+    <p>Manage bookings and assign drivers</p>
+  </div>
+
+  <!-- Display success or failure messages based on URL query parameter -->
+  <div class="alert-container">
+    <c:if test="${not empty param.message}">
+      <div class="alert alert-info">${param.message}</div>
+    </c:if>
+  </div>
+
+  <!-- Bookings Table -->
+  <div class="card p-3">
+    <h3 class="text-center">Bookings</h3>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Customer</th>
+        <th>Pickup Location</th>
+        <th>Destination</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody id="bookingsTable">
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="text-center mt-4">
+    <button class="btn btn-success" onclick="window.location.href='manage_drivers.html'">Manage Drivers</button>
+    <button class="btn btn-primary" onclick="window.location.href='manage_destinations.jsp'">Manage Destinations</button>
+  </div>
+</div>
+
+<script>
+  // Fetch and display bookings from backend (AJAX)
+  function loadBookings() {
+    fetch('/admin/getBookings')  // Call to the backend servlet to fetch bookings
+            .then(response => response.json())
+            .then(bookings => {
+              const bookingsTable = document.getElementById('bookingsTable');
+              bookingsTable.innerHTML = ''; // Clear table
+
+              bookings.forEach(booking => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${booking.id}</td>
+            <td>${booking.customerName}</td>
+            <td>${booking.pickupLocation}</td>
+            <td>${booking.destination}</td>
+            <td>${booking.status}</td>
+            <td>
+              <button class="btn btn-info btn-sm" onclick="updateBookingStatus(${booking.id}, 'assigned')">Assign</button>
+              <button class="btn btn-warning btn-sm" onclick="updateBookingStatus(${booking.id}, 'pending')">Pending</button>
+            </td>
+          `;
+                bookingsTable.appendChild(row);
+              });
+            })
+            .catch(error => console.error('Error fetching bookings:', error));
+  }
+
+  // Update booking status (mock function for now)
+  function updateBookingStatus(bookingId, newStatus) {
+    console.log(`Updating booking ID ${bookingId} to status ${newStatus}`);
+    loadBookings(); // Reload the bookings after updating
+  }
+
+  // Load bookings when the page is ready
+  window.onload = loadBookings;
+</script>
+
+</body>
+</html>
